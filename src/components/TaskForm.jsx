@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import {} from ''
+import { useDispatch } from "react-redux";
+import { addTaks } from "../features/tasks/taskSlice";
+import { v4 as uuid } from "uuid"; // Nos permite generar Id únicos
 
 function TaskForm() {
   const [task, setTask] = useState({
     title: "",
     description: "",
   });
+
+  const dispatch = useDispatch(); // Nos permite usar los reducers del slice
 
   const handleChange = (e) => {
     setTask({
@@ -15,12 +19,17 @@ function TaskForm() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    
+    e.preventDefault();
+    dispatch(
+      addTaks({
+        ...task,
+        id: uuid(),
+      })
+    );
   };
 
   return (
-    <form action="#" onClick={handleSubmit}>
+    <form action="#" onSubmit={handleSubmit}>
       <input
         name="title"
         type="text"
