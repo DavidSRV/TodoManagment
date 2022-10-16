@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTaks } from "../features/tasks/taskSlice";
 import { v4 as uuid } from "uuid"; // Nos permite generar Id únicos
+import '../style/compSytle/_TaskFormStyle.scss'
 
 function TaskForm() {
   const [task, setTask] = useState({
-    title: "",
     description: "",
   });
 
@@ -30,23 +30,14 @@ function TaskForm() {
 
   return (
     <form action="#" onSubmit={handleSubmit}>
-      <input
-        name="title"
+      <input className="input"
+        name="description"
         type="text"
-        placeholder="Title"
+        placeholder="Type Task"
         onChange={handleChange}
       />
 
-      <textarea
-        onChange={handleChange}
-        name="description"
-        placeholder="Description"
-        id=""
-        cols="30"
-        rows="10"
-      ></textarea>
-
-      <button>Save</button>
+      {/* <button>Save</button> */}
     </form>
   );
 }

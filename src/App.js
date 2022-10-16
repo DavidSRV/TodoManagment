@@ -1,15 +1,16 @@
-import { useSelector } from "react-redux";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
+import "./style/compSytle/_AppStyle.scss";
 
 function App() {
-  const stateTask = useSelector((state) => state.tasks);
-
   return (
     <div className="App">
-      <h1>Hello World</h1>
-      <TaskForm />
-      <TaskList />
+      <div className="App__background"></div>
+      <main className="App__container">
+        <h1>TODO</h1>
+        <TaskForm />
+        <TaskList />
+      </main>
     </div>
   );
 }
