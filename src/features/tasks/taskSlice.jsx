@@ -34,6 +34,11 @@ export const taskSlice = createSlice({
         state.splice(state.indexOf(taskfaund), 1);
       }
     },
+    completedTask:(state, action) => {
+      const taskfound = state.find((task) => task.id === action.payload);
+      
+      
+    }
   },
 });
 

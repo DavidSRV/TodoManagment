@@ -1,5 +1,7 @@
 @use './resets';
+@use './colors' as *;
 
 body{
     font-family: 'Josefin Sans', sans-serif;
+    background-color: $LTVeryLightGrayishBlue;
 }
