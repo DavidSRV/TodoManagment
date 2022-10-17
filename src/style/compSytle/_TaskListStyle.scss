@@ -66,7 +66,9 @@
                     color: black;
                     cursor: pointer;
 
-                    &--completed {}
+                    &.--completed {
+                        
+                    }
 
                     &:hover {
                         border-radius: 50%;

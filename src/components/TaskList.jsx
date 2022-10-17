@@ -42,11 +42,11 @@ function TaskList() {
                 onClick={() => addClass(task.id)}
                 ref={ref}
                 id="ref"
-                className={`task__circle`}
+                className={`task__circle --completed`}
               ></span>
               <p
-                className={`task__description${
-                  stateTask[0].completed < 0 ? "--completed" : ""
+                className={`task__description ${
+                  task.completed ? "--completed" : ""
                 }`}
               >{`${task.description}`}</p>
             </div>
