@@ -75,6 +75,7 @@
         justify-content: center;
         padding: 20px;
         border-bottom: 1px solid $LightGrayishBlue;
+        user-select: none;
 
         & h1 {
             text-align: center;
@@ -117,7 +118,7 @@
 
         & .inputs__clear {
             font-size: 0.8rem;
-            
+
             @include inputsState()
         }
 

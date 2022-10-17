@@ -1,7 +1,34 @@
 @use './resets';
 @use './colors' as *;
 
-body{
+body {
     font-family: 'Josefin Sans', sans-serif;
     background-color: $LTVeryLightGrayishBlue;
+
+
+    .container__titleInput {
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        & .title {
+            color: $LTVeryLightGray;
+            letter-spacing: 10px;
+            user-select: none;
+        }
+
+        & .inputTheme {
+            cursor: pointer;
+
+            &:hover {
+                transform: scale(1.2);
+                
+            }
+
+        }
+    }
+
+
+
 }

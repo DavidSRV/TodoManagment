@@ -1,19 +1,35 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { deleteTask } from "../features/tasks/taskSlice";
+import { deleteTask, completedTask } from "../features/tasks/taskSlice";
 import close from "../assets/images/icon-cross.svg";
 import check from "../assets/images/icon-check.svg";
 import "../style/compSytle/_TaskListStyle.scss";
 
 function TaskList() {
   const stateTask = useSelector((state) => state.tasks);
+  const ref = useRef(null);
   const dispatch = useDispatch();
 
   const handleDelete = (taskId) => {
     dispatch(deleteTask(taskId));
   };
 
+  const handleComplete = (taskId) => {
+    dispatch(completedTask(taskId));
+  };
+  
+  function addClass(taskId){
+    handleComplete(taskId)
+    
+    const completed = stateTask.indexOf(
+      stateTask.find((task) => task.id === taskId)
+    );
+
+    
+    
+    
+  }
   
 
   return (
@@ -22,7 +38,11 @@ function TaskList() {
         <div className="tasks" key={task.id}>
           <div className="task__container">
             <div className="task__group">
-              <span className="task__circle"></span>
+              <span
+                onClick={() => addClass(task.id)}
+                ref={ref}
+                className={`task__circle ${stateTask.completed ? '--completed' : ''}`}
+              ></span>
               <p>{`${task.description}`}</p>
             </div>
             <img

@@ -7,6 +7,7 @@ import '../style/compSytle/_TaskFormStyle.scss'
 function TaskForm() {
   const [task, setTask] = useState({
     description: "",
+    completed: false,
   });
 
   const dispatch = useDispatch(); // Nos permite usar los reducers del slice

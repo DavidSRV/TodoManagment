@@ -34,13 +34,14 @@ export const taskSlice = createSlice({
         state.splice(state.indexOf(taskfaund), 1);
       }
     },
-    completedTask:(state, action) => {
-      const taskfound = state.find((task) => task.id === action.payload);
-      
-      
-    }
+    completedTask: (state, action) => {
+      const taskfound = state.indexOf(
+        state.find((task) => task.id === action.payload)
+      );
+      state[taskfound].completed = true;
+    },
   },
 });
 
 export default taskSlice.reducer;
-export const { addTaks, deleteTask } = taskSlice.actions;
+export const { addTaks, deleteTask, completedTask } = taskSlice.actions;
