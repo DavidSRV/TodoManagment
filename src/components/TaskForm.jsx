@@ -1,14 +1,18 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addTaks } from "../features/tasks/taskSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addTaks } from "../features/slices/taskSlice";
 import { v4 as uuid } from "uuid"; // Nos permite generar Id únicos
 import '../style/compSytle/_TaskFormStyle.scss'
+import { selectDarkMode, toggletheme } from "../features/slices/themeSlice";
+
 
 function TaskForm() {
   const [task, setTask] = useState({
     description: "",
     completed: false,
   });
+
+  const darkMode = useSelector(selectDarkMode);
 
   const dispatch = useDispatch(); // Nos permite usar los reducers del slice
 
@@ -31,7 +35,7 @@ function TaskForm() {
 
   return (
     <form action="#" onSubmit={handleSubmit}>
-      <input className="input"
+      <input className={`input ${darkMode ? '--darkMode' : ''}`}
         name="description"
         type="text"
         placeholder="Type Task"

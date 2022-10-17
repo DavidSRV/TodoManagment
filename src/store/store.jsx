@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import taskReducer from "../features/tasks/taskSlice";
+import taskReducer from "../features/slices/taskSlice";
+import themeReducer from "../features/slices/themeSlice"
 
 export const store = configureStore({
   reducer: {
-    tasks: taskReducer, // Ya tenemos la store configurada
+    tasks: taskReducer,
+    theme: themeReducer
   },
 });

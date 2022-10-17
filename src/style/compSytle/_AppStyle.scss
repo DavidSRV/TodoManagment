@@ -1,7 +1,20 @@
+@use '../colors' as *;
+
 .App {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background-color: $LTVeryLightGrayishBlue;
+    position: relative;
+    z-index: 10;
+    transition: background-color 0.6s;
+
+    &.--darkMode {
+        background-color: $VeryDarkBlue;
+        transition: background-color 0.6s;
+    }
 
     & .App__background {
         position: absolute;
@@ -12,6 +25,14 @@
         background-image: url('../../assets/images/bg-desktop-light.jpg');
         background-repeat: no-repeat;
         background-size: cover;
+        transition: background-image 0.6s;
+
+        &.--darkMode {
+            background-image: url('../../assets/images/bg-desktop-dark.jpg');
+            transition: background-image 0.6s;
+        }
+
+
     }
 
 
@@ -22,6 +43,31 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+        position: absolute;
+        top: 30px;
+
+        .container__titleInput {
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+
+            & .title {
+                color: $LTVeryLightGray;
+                letter-spacing: 10px;
+                user-select: none;
+            }
+
+            & .inputTheme {
+                cursor: pointer;
+
+                &:hover {
+                    transform: scale(1.2);
+                }
+
+            }
+        }
 
     }
 
