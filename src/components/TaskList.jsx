@@ -1,4 +1,3 @@
-import React, { useRef } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { deleteTask, completedTask } from "../features/slices/taskSlice";
@@ -10,7 +9,6 @@ import { selectDarkMode } from "../features/slices/themeSlice";
 function TaskList() {
   const stateTask = useSelector((state) => state.tasks);
   const darkMode = useSelector(selectDarkMode);
-  const ref = useRef(null);
   const dispatch = useDispatch();
 
   const handleDelete = (taskId) => {
@@ -21,17 +19,6 @@ function TaskList() {
     dispatch(completedTask(taskId));
   };
 
-  function addClass(taskId) {
-    handleComplete(taskId);
-
-    const completed = stateTask.indexOf(
-      stateTask.find((task) => task.id === taskId)
-    );
-
-    let complet = document.getElementsByClassName("task__circle")[completed];
-    complet.className = "--completed";
-  }
-
   return (
     <div className={`containerGeneral ${darkMode ? "--darkMode" : ""}`}>
       {stateTask.map((task) => (
@@ -39,8 +26,7 @@ function TaskList() {
           <div className="task__container">
             <div className="task__group">
               <span
-                onClick={() => addClass(task.id)}
-                ref={ref}
+                onClick={()=>handleComplete(task.id)}
                 id="ref"
                 className={`task__circle --completed`}
               ></span>
