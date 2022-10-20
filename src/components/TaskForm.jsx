@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTaks } from "../features/slices/taskSlice";
 import { v4 as uuid } from "uuid"; // Nos permite generar Id únicos

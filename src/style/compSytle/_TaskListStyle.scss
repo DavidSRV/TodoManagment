@@ -1,11 +1,11 @@
 @use '../colors' as *;
 
-@mixin inputsState {
+@mixin inputState {
     cursor: pointer;
     font-weight: 700;
     user-select: none;
 
-    &.--darkMode{
+    &.--darkMode {
         &:hover {
             color: $LightGrayishBlue;
         }
@@ -14,6 +14,16 @@
     &:hover {
         color: $VeryDarkBlue;
     }
+}
+
+@mixin inputComplete($type) {
+    display: block;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    border: 1px $type $LTDarkGrayishBlue;
+    cursor: pointer;
+
 }
 
 .containerGeneral {
@@ -37,7 +47,7 @@
         border-bottom: 1px solid $LTLightGrayishwBlue;
         transition: all 0.6s;
 
-        &.--darkMode{
+        &.--darkMode {
             border-bottom: 1px solid $VeryDarkGrayishBlue;
 
         }
@@ -57,32 +67,33 @@
                 align-items: center;
                 gap: 15px;
 
-                & .task__circle {
-                    display: block;
-                    border-radius: 50%;
+
+                & .task__select {
+
                     width: 20px;
                     height: 20px;
-                    border: 1px solid $LTDarkGrayishBlue;
-                    color: black;
+                    border: 1px solid $DarkGrayishBlue;
+                    border-radius: 50%;
                     cursor: pointer;
 
-                    &.--completed {
-                        
-                    }
-
                     &:hover {
+                        border: 1px solid transparent;
                         border-radius: 50%;
-                        border: 4px solid transparent;
-                        background: linear-gradient(to left, #56DDFF, #BF58F3) no-repeat center;
-                        background-size: contain;
+                        border-image: linear-gradient(45deg, #56DDFF, #BF58F3) 1;
                         width: 20px;
                         height: 20px;
-                        background-image: url('../../assets/images/icon-check.svg');
+                        padding: -10px -12px;
                     }
 
                 }
 
+                & .task__containerComplete {
+                    @include inputComplete(transparent);
+                    display: grid;
+                    place-content: center;
+                    background-image: linear-gradient(to left, #56DDFF, #BF58F3);
 
+                }
 
                 & .task__description {
 
@@ -101,8 +112,10 @@
 
                 &:hover {
                     transform: scale(1.2);
+
                 }
             }
+
 
         }
     }
@@ -142,15 +155,15 @@
             gap: 10px;
 
             & .inputs__all {
-                @include inputsState()
+                @include inputState()
             }
 
             & .inputs__active {
-                @include inputsState()
+                @include inputState()
             }
 
             & .inputs__completed {
-                @include inputsState()
+                @include inputState()
             }
 
         }
@@ -158,7 +171,7 @@
         & .inputs__clear {
             font-size: 0.8rem;
 
-            @include inputsState()
+            @include inputState()
         }
 
     }
