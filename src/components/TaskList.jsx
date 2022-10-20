@@ -6,12 +6,6 @@ import check from "../assets/images/icon-check.svg";
 import "../style/compSytle/_TaskListStyle.scss";
 import { selectDarkMode } from "../features/slices/themeSlice";
 import { useEffect, useState } from "react";
-// import { filterTask } from "../features/slices/taskFilterSlice";
-// import {
-//   allTask,
-//   activeTask,
-//   doneTask,
-// } from "../features/slices/taskFilterSlice";
 
 function TaskList() {
   const [filter, setFilter] = useState([]);
@@ -40,32 +34,24 @@ function TaskList() {
   };
 
   const handleFilterActive = () => {
-    const filterActive = stateTask.find((item) => item.completed === true)
+    const filterActive = stateTask.filter((item) => item.completed === false)
     console.log(filterActive + ' busqueda find');
     console.log(filter + ' Estado filter')
     if(filterActive){
       setFilter([...filterActive])
     }else{
-      console.log('item no found')
+
     }
   }
 
+  const handleFilterCompleted = () => {
+    const filterCompleted = stateTask.filter((item) => item.completed === true)
+    if(filterCompleted){
+      setFilter([...filterCompleted])
+    }else{
 
-  //FILTER
-
-  // let taskFilter = useSelector(filterTask);
-
-  // const handleFilterAll = () => {
-  //   dispatch(allTask(stateTask));
-  // };
-
-  // const handleFilterActive = () => {
-  //   dispatch(activeTask(stateTask));
-  // };
-
-  // const handleFilterDone = () => {
-  //   dispatch(doneTask(stateTask));
-  // };
+    }
+  }
 
   return (
     <div className={`containerGeneral ${darkMode ? "--darkMode" : ""}`}>
@@ -126,7 +112,7 @@ function TaskList() {
           </p>
           <p
             className={`inputs__completed ${darkMode ? "--darkMode" : ""}`}
-            onClick={null}
+            onClick={handleFilterCompleted}
           >
             Completed
           </p>
