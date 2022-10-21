@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { deleteTask, completedTask } from "../features/slices/taskSlice";
+import { deleteTask, completedTask, clearCompleted} from "../features/slices/taskSlice";
 import close from "../assets/images/icon-cross.svg";
 import check from "../assets/images/icon-check.svg";
 import "../style/compSytle/_TaskListStyle.scss";
 import { selectDarkMode } from "../features/slices/themeSlice";
 import { useEffect, useState } from "react";
+import swal from "sweetalert";
 
 function TaskList() {
   const [filter, setFilter] = useState([]);
@@ -17,8 +18,6 @@ function TaskList() {
     setFilter(stateTask);
   }, [stateTask]);
 
-  console.log(filter);
-
   const dispatch = useDispatch();
 
   const handleDelete = (taskId) => {
@@ -29,27 +28,39 @@ function TaskList() {
     dispatch(completedTask(taskId));
   };
 
+  const handleClear = () => {
+    dispatch(clearCompleted())
+  }
+
   const handleFilterAll = () => {
-    setFilter(stateTask);
+    if(stateTask.length === 0){
+      swal('There are no pending tasks',{
+        className: "alert",
+      })
+    }else{
+      setFilter(stateTask);
+    }
   };
 
   const handleFilterActive = () => {
     const filterActive = stateTask.filter((item) => item.completed === false)
-    console.log(filterActive + ' busqueda find');
-    console.log(filter + ' Estado filter')
-    if(filterActive){
+    if(filterActive.length >= 1){
       setFilter([...filterActive])
     }else{
-
+      swal('There are no active tasks',{
+        className: "alert",
+      })
     }
   }
 
   const handleFilterCompleted = () => {
     const filterCompleted = stateTask.filter((item) => item.completed === true)
-    if(filterCompleted){
+    if(filterCompleted.length >= 1){
       setFilter([...filterCompleted])
     }else{
-
+      swal('There are no completed tasks',{
+        className: "alert",
+      })
     }
   }
 
@@ -117,7 +128,7 @@ function TaskList() {
             Completed
           </p>
         </div>
-        <p className={`inputs__clear ${darkMode ? "--darkMode" : ""}`}>
+        <p className={`inputs__clear ${darkMode ? "--darkMode" : ""}`} onClick={handleClear}>
           Clear Completed
         </p>
       </div>

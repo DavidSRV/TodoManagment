@@ -75,14 +75,10 @@
                     border: 1px solid $DarkGrayishBlue;
                     border-radius: 50%;
                     cursor: pointer;
+                    position: relative;
 
                     &:hover {
-                        border: 1px solid transparent;
-                        border-radius: 50%;
-                        border-image: linear-gradient(45deg, #56DDFF, #BF58F3) 1;
-                        width: 20px;
-                        height: 20px;
-                        padding: -10px -12px;
+                        border: 1px solid #bf58f3cc;
                     }
 
                 }
@@ -92,7 +88,6 @@
                     display: grid;
                     place-content: center;
                     background-image: linear-gradient(to left, #56DDFF, #BF58F3);
-
                 }
 
                 & .task__description {
@@ -112,7 +107,7 @@
 
                 &:hover {
                     transform: scale(1.2);
-
+                    display: block;
                 }
             }
 
@@ -176,5 +171,9 @@
 
     }
 
+}
 
+.alert {
+    position: relative;
+    bottom: 100px;
 }
