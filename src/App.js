@@ -5,14 +5,57 @@ import moon from "../src/assets/images/icon-moon.svg";
 import sun from "../src/assets/images/icon-sun.svg";
 import { selectDarkMode, toggletheme } from "./features/slices/themeSlice";
 import { useDispatch, useSelector } from "react-redux";
+import {useEffect, useState} from 'react'
+import swal from "sweetalert"; 
 
 function App() {
+
+  const stateTask = useSelector((state) => state.tasks);
+
   const darkMode = useSelector(selectDarkMode);
 
   const dispatch = useDispatch();
 
   const handleTheme = () => {
     dispatch(toggletheme());
+  };
+
+  const [filter, setFilter] = useState([]);
+
+  useEffect(() => {
+    setFilter(stateTask);
+  }, [stateTask]);
+
+  const handleFilterAll = () => {
+    if (stateTask.length === 0) {
+      swal("There are no pending tasks", {
+        className: "alert",
+      });
+    } else {
+      setFilter(stateTask);
+    }
+  };
+
+  const handleFilterActive = () => {
+    const filterActive = stateTask.filter((item) => item.completed === false);
+    if (filterActive.length >= 1) {
+      setFilter([...filterActive]);
+    } else {
+      swal("There are no active tasks", {
+        className: "alert",
+      });
+    }
+  };
+
+  const handleFilterCompleted = () => {
+    const filterCompleted = stateTask.filter((item) => item.completed === true);
+    if (filterCompleted.length >= 1) {
+      setFilter([...filterCompleted]);
+    } else {
+      swal("There are no completed tasks", {
+        className: "alert",
+      });
+    }
   };
 
   return (
@@ -37,8 +80,8 @@ function App() {
             ></img>
           )}
         </div>
-        <TaskForm />
-        <TaskList />
+        <TaskForm darkMode={darkMode}/>
+        <TaskList filter={filter} setFilter={setFilter} darkMode={darkMode} handleFilterCompleted={handleFilterCompleted} handleFilterActive={handleFilterActive} handleFilterAll={handleFilterAll}/>
       </main>
     </div>
   );

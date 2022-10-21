@@ -1,5 +1,43 @@
 @use './resets';
 
+$small: 'small';
+$medium: 'medium';
+$large: 'large';
+
+$screen-small-max: 500px;
+$screen-medium-max: 1024px;
+$screen-large-max: 1440px;
+
+@mixin for-size($size) {
+  @if $size == $small {
+    @media (max-width: $screen-small-max) {
+      @content;
+    }
+  } @else if $size == $medium {
+    @media (max-width: $screen-medium-max) {
+      @content;
+    }
+  } @else if $size == $large {
+    @media (max-width: $screen-large-max) {
+      @content;
+    }
+  }
+}
+
+@mixin for-custom-size($screen, $is-min-width: true) {
+  $prefix: if($is-min-width, 'min', 'max');
+
+  @media (#{$prefix}-width: #{$screen}) {
+    @content;
+  }
+}
+
+@mixin for-custom-size-range($screen-min, $screen-max) {
+  @media (min-width: #{$screen-min}) and (max-width: #{$screen-max}) {
+    @content;
+  }
+}
+
 body {
     font-family: 'Josefin Sans', sans-serif;
 }

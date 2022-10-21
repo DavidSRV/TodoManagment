@@ -1,4 +1,5 @@
 @use '../colors' as *;
+@use '../style.scss' as *;
 
 .App {
     display: flex;
@@ -34,16 +35,23 @@
 
     }
 
-
     & .App__container {
         width: 500px;
-        min-width: 390px;
+        min-width: 360px;
         margin-top: 40px;
         display: flex;
         flex-direction: column;
         gap: 20px;
         position: absolute;
         top: 30px;
+
+        @include for-size(small){
+            width: inherit;
+            max-width: 400px;
+            margin: 40px 10px;
+            padding: 15px;
+
+        }
 
         .container__titleInput {
 

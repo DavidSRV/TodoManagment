@@ -1,22 +1,21 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { deleteTask, completedTask, clearCompleted} from "../features/slices/taskSlice";
+import {
+  deleteTask,
+  completedTask,
+  clearCompleted,
+} from "../features/slices/taskSlice";
 import close from "../assets/images/icon-cross.svg";
 import check from "../assets/images/icon-check.svg";
 import "../style/compSytle/_TaskListStyle.scss";
 import { selectDarkMode } from "../features/slices/themeSlice";
 import { useEffect, useState } from "react";
 import swal from "sweetalert";
+import { useMediaQuery } from "react-responsive";
 
 function TaskList() {
-  const [filter, setFilter] = useState([]);
-
   const stateTask = useSelector((state) => state.tasks);
   const darkMode = useSelector(selectDarkMode);
-
-  useEffect(() => {
-    setFilter(stateTask);
-  }, [stateTask]);
 
   const dispatch = useDispatch();
 
@@ -29,40 +28,51 @@ function TaskList() {
   };
 
   const handleClear = () => {
-    dispatch(clearCompleted())
-  }
+    dispatch(clearCompleted());
+  };
+
+  const [filter, setFilter] = useState([]);
+
+  useEffect(() => {
+    setFilter(stateTask);
+  }, [stateTask]);
 
   const handleFilterAll = () => {
-    if(stateTask.length === 0){
-      swal('There are no pending tasks',{
+    if (stateTask.length === 0) {
+      swal("There are no pending tasks", {
         className: "alert",
-      })
-    }else{
+      });
+    } else {
       setFilter(stateTask);
     }
   };
 
   const handleFilterActive = () => {
-    const filterActive = stateTask.filter((item) => item.completed === false)
-    if(filterActive.length >= 1){
-      setFilter([...filterActive])
-    }else{
-      swal('There are no active tasks',{
+    const filterActive = stateTask.filter((item) => item.completed === false);
+    if (filterActive.length >= 1) {
+      setFilter([...filterActive]);
+    } else {
+      swal("There are no active tasks", {
         className: "alert",
-      })
+      });
     }
-  }
+  };
 
   const handleFilterCompleted = () => {
-    const filterCompleted = stateTask.filter((item) => item.completed === true)
-    if(filterCompleted.length >= 1){
-      setFilter([...filterCompleted])
-    }else{
-      swal('There are no completed tasks',{
+    const filterCompleted = stateTask.filter((item) => item.completed === true);
+    if (filterCompleted.length >= 1) {
+      setFilter([...filterCompleted]);
+    } else {
+      swal("There are no completed tasks", {
         className: "alert",
-      })
+      });
     }
-  }
+  };
+
+  let Mobile = ({ children }) => {
+    const isMobile = useMediaQuery({ query: "(max-width:500px)" });
+    return isMobile ? children : null;
+  };
 
   return (
     <div className={`containerGeneral ${darkMode ? "--darkMode" : ""}`}>
@@ -85,7 +95,6 @@ function TaskList() {
                   ></img>
                 </div>
               )}
-
               <p
                 className={`task__description ${
                   task.completed ? "--completed" : ""
@@ -128,11 +137,14 @@ function TaskList() {
             Completed
           </p>
         </div>
-        <p className={`inputs__clear ${darkMode ? "--darkMode" : ""}`} onClick={handleClear}>
+        <p
+          className={`inputs__clear ${darkMode ? "--darkMode" : ""}`}
+          onClick={handleClear}
+        >
           Clear Completed
         </p>
       </div>
-    </div>
+    </div>      
   );
 }
 
