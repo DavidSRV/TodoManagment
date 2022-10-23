@@ -70,7 +70,7 @@ function TaskList({filter, handleFilterCompleted, handleFilterActive, handleFilt
       )}
       <div className="inputs__container">
         <p className="inputs__taskLength">{`${filter.length} items left`}</p>
-        <div className={`inputs__state`}>
+        <div className={`inputs__state ${darkMode ? "--darkMode" : ""}`}>
           <p
             className={`inputs__all ${darkMode ? "--darkMode" : ""}`}
             onClick={handleFilterAll}
