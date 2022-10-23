@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/TodoManagment/static/css/main.24a1f81d.css",
+    "main.css": "/TodoManagment/static/css/main.301bfa48.css",
     "main.js": "/TodoManagment/static/js/main.06548f35.js",
     "static/media/bg-desktop-light.jpg": "/TodoManagment/static/media/bg-desktop-light.3508d620efd5a52bb4ce.jpg",
     "static/media/bg-desktop-dark.jpg": "/TodoManagment/static/media/bg-desktop-dark.73e47dbb723ebc772ef0.jpg",
@@ -9,11 +9,11 @@
     "static/media/icon-moon.svg": "/TodoManagment/static/media/icon-moon.6c03114b495d05f4380b3c544d9afe2a.svg",
     "static/media/icon-cross.svg": "/TodoManagment/static/media/icon-cross.6ee81d30b75cab19d6f7314624fcc4d6.svg",
     "static/media/icon-check.svg": "/TodoManagment/static/media/icon-check.a8fb15d0278c8e312df5fc8364fef863.svg",
-    "main.24a1f81d.css.map": "/TodoManagment/static/css/main.24a1f81d.css.map",
+    "main.301bfa48.css.map": "/TodoManagment/static/css/main.301bfa48.css.map",
     "main.06548f35.js.map": "/TodoManagment/static/js/main.06548f35.js.map"
   },
   "entrypoints": [
-    "static/css/main.24a1f81d.css",
+    "static/css/main.301bfa48.css",
     "static/js/main.06548f35.js"
   ]
 }
