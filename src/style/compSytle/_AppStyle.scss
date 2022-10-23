@@ -1,5 +1,6 @@
 @use '../colors' as *;
 @use '../style.scss' as *;
+@use '../compSytle/TaskListStyle' as *;
 
 .App {
     display: flex;
@@ -45,7 +46,7 @@
         position: absolute;
         top: 30px;
 
-        @include for-size(small){
+        @include for-size(small) {
             width: inherit;
             max-width: 400px;
             margin: 40px 10px;
@@ -74,6 +75,32 @@
                 }
 
             }
+        }
+
+    }
+
+    & .inputs__state {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        border-radius: 5px;
+        background-color: $LTVeryLightGray;
+        color: $DarkGrayishBlue;
+
+        &.--darkMode {
+            background-color: $VeryDarkDesaturatedBlue;
+        }
+
+        & .inputs__all {
+            @include inputState()
+        }
+
+        & .inputs__active {
+            @include inputState()
+        }
+
+        & .inputs__completed {
+            @include inputState()
         }
 
     }

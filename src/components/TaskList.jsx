@@ -9,12 +9,8 @@ import close from "../assets/images/icon-cross.svg";
 import check from "../assets/images/icon-check.svg";
 import "../style/compSytle/_TaskListStyle.scss";
 import { selectDarkMode } from "../features/slices/themeSlice";
-import { useEffect, useState } from "react";
-import swal from "sweetalert";
-import { useMediaQuery } from "react-responsive";
 
-function TaskList() {
-  const stateTask = useSelector((state) => state.tasks);
+function TaskList({filter, handleFilterCompleted, handleFilterActive, handleFilterAll}) {
   const darkMode = useSelector(selectDarkMode);
 
   const dispatch = useDispatch();
@@ -30,50 +26,7 @@ function TaskList() {
   const handleClear = () => {
     dispatch(clearCompleted());
   };
-
-  const [filter, setFilter] = useState([]);
-
-  useEffect(() => {
-    setFilter(stateTask);
-  }, [stateTask]);
-
-  const handleFilterAll = () => {
-    if (stateTask.length === 0) {
-      swal("There are no pending tasks", {
-        className: "alert",
-      });
-    } else {
-      setFilter(stateTask);
-    }
-  };
-
-  const handleFilterActive = () => {
-    const filterActive = stateTask.filter((item) => item.completed === false);
-    if (filterActive.length >= 1) {
-      setFilter([...filterActive]);
-    } else {
-      swal("There are no active tasks", {
-        className: "alert",
-      });
-    }
-  };
-
-  const handleFilterCompleted = () => {
-    const filterCompleted = stateTask.filter((item) => item.completed === true);
-    if (filterCompleted.length >= 1) {
-      setFilter([...filterCompleted]);
-    } else {
-      swal("There are no completed tasks", {
-        className: "alert",
-      });
-    }
-  };
-
-  let Mobile = ({ children }) => {
-    const isMobile = useMediaQuery({ query: "(max-width:500px)" });
-    return isMobile ? children : null;
-  };
-
+  
   return (
     <div className={`containerGeneral ${darkMode ? "--darkMode" : ""}`}>
       {filter.map((task) => (
@@ -144,7 +97,7 @@ function TaskList() {
           Clear Completed
         </p>
       </div>
-    </div>      
+    </div>
   );
 }
 

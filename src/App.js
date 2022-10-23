@@ -5,11 +5,11 @@ import moon from "../src/assets/images/icon-moon.svg";
 import sun from "../src/assets/images/icon-sun.svg";
 import { selectDarkMode, toggletheme } from "./features/slices/themeSlice";
 import { useDispatch, useSelector } from "react-redux";
-import {useEffect, useState} from 'react'
-import swal from "sweetalert"; 
+import { useEffect, useState } from "react";
+import swal from "sweetalert";
+import { useMediaQuery } from "react-responsive";
 
 function App() {
-
   const stateTask = useSelector((state) => state.tasks);
 
   const darkMode = useSelector(selectDarkMode);
@@ -58,6 +58,11 @@ function App() {
     }
   };
 
+  let Mobile = ({ children }) => {
+    const isMobile = useMediaQuery({ query: "(max-width:500px)" });
+    return isMobile ? children : null;
+  };
+
   return (
     <div className={`App ${darkMode ? "--darkMode" : ""}`}>
       <div className={`App__background ${darkMode ? "--darkMode" : ""}`}></div>
@@ -80,8 +85,38 @@ function App() {
             ></img>
           )}
         </div>
-        <TaskForm darkMode={darkMode}/>
-        <TaskList filter={filter} setFilter={setFilter} darkMode={darkMode} handleFilterCompleted={handleFilterCompleted} handleFilterActive={handleFilterActive} handleFilterAll={handleFilterAll}/>
+        <TaskForm darkMode={darkMode} />
+        <TaskList
+          filter={filter}
+          setFilter={setFilter}
+          darkMode={darkMode}
+          handleFilterCompleted={handleFilterCompleted}
+          handleFilterActive={handleFilterActive}
+          handleFilterAll={handleFilterAll}
+        />
+
+        <Mobile>
+          <div className={`inputs__state ${darkMode ? "--darkMode" : ""}`}>
+            <p
+              className={`inputs__all ${darkMode ? "--darkMode" : ""}`}
+              onClick={handleFilterAll}
+            >
+              All
+            </p>
+            <p
+              className={`inputs__active ${darkMode ? "--darkMode" : ""}`}
+              onClick={handleFilterActive}
+            >
+              Active
+            </p>
+            <p
+              className={`inputs__completed ${darkMode ? "--darkMode" : ""}`}
+              onClick={handleFilterCompleted}
+            >
+              Completed
+            </p>
+          </div>
+        </Mobile>
       </main>
     </div>
   );
